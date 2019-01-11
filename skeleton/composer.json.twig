@@ -4,6 +4,7 @@
     "license": "proprietary",
     "require": {
         "aydin-hassan/magento-core-composer-installer": "^1.5",
+        "inviqa/magento-{{ @('magento.edition') }}": "{{ @('magento.version') }}",
         "inviqa/magento-symfony-container": "^1.1",
         "ocramius/proxy-manager": "^1.0",
         "symfony/proxy-manager-bridge": "^2.6.13"
@@ -70,7 +71,7 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/inviqa/magento-{{ @('magento-edition') }}.git"
+            "url": "https://github.com/inviqa/magento-{{ @('magento.edition') }}.git"
         }
     ],
     "extra": {
