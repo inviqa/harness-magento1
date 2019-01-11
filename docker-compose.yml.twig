@@ -15,21 +15,21 @@ services:
     labels:
       - traefik.enable=false
   console:
-    {% if @('app.build') == 'dynamic' %} 
+    {% if @('app.build') == 'dynamic' %}
     entrypoint: /entrypoint.dynamic.sh
     volumes:
       - {{ (dockersync) ? @('workspace.name') ~ '-sync:/app:nocopy' : '../:/app:delegated' }}
       - ./skeleton:/home/build/skeleton
-    {% endif %} 
+    {% endif %}
     labels:
       - traefik.enable=false
     build:
       context: ../
       dockerfile: .my127ws/docker/image/console/Dockerfile
-      {% if @('app.build') == 'static' %} 
+      {% if @('app.build') == 'static' %}
       args:
         APP_MODE: {{ @('app.mode') }}
-      {% endif %} 
+      {% endif %}
     environment: &APP_ENV_VARS
       MAGENTO_CRYPT_KEY: ${MAGENTO_CRYPT_KEY}
       HOST_OS_FAMILY: ${HOST_OS_FAMILY}
@@ -47,10 +47,10 @@ services:
       - redis
   nginx:
     build: docker/image/nginx
-    {% if @('app.build') == 'dynamic' %} 
+    {% if @('app.build') == 'dynamic' %}
     volumes:
       - {{ (dockersync) ? @('workspace.name') ~ '-sync:/app:nocopy' : '../:/app:delegated' }}
-    {% endif %} 
+    {% endif %}
     labels:
       - traefik.backend=${APP_NAME}
       - traefik.frontend.rule=Host:${APP_HOST}
@@ -65,11 +65,11 @@ services:
       - shared
   php-fpm:
     build: docker/image/php-fpm
-    {% if @('app.build') == 'dynamic' %} 
+    {% if @('app.build') == 'dynamic' %}
     entrypoint: /entrypoint.dynamic.sh
     volumes:
       - {{ (dockersync) ? @('workspace.name') ~ '-sync:/app:nocopy' : '../:/app:delegated' }}
-    {% endif %} 
+    {% endif %}
     labels:
       - traefik.enable=false
     networks:
@@ -79,6 +79,12 @@ services:
       - console
     environment:
       <<: *APP_ENV_VARS
+  memcached:
+    image: memcached:1-alpine
+    labels:
+      - traefik.enable=false
+    networks:
+      - private
   mysql:
     image: mysql:5.7
     labels:
@@ -97,6 +103,13 @@ services:
       - private
       - shared
   redis:
+    image: redis:4-alpine
+    labels:
+      - traefik.enable=false
+      - co.elastic.logs/module=redis
+    networks:
+      - private
+  redis-session:
     image: redis:4-alpine
     labels:
       - traefik.enable=false
