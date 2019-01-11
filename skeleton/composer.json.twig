@@ -1,0 +1,97 @@
+{
+    "name": "{{ @('workspace.name') }}",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "inviqa/magento-symfony-container": "^1.1",
+        "ocramius/proxy-manager": "^1.0",
+        "symfony/proxy-manager-bridge": "^2.6.13"
+    },
+    "require-dev": {
+        "behat/behat": "^3.4",
+        "behat/mink": "^1.7",
+        "behat/mink-extension": "^2.3",
+        "behat/mink-goutte-driver": "^1.2",
+        "ciaranmcnulty/behat-stepthroughextension": "^1.0",
+        "dmore/chrome-mink-driver": "^2.6",
+        "friends-of-behat/context-service-extension": "^1.2",
+        "friends-of-behat/cross-container-extension": "^1.1",
+        "friendsofphp/php-cs-fixer": "~2.2.1",
+        "lusitanian/oauth": "~0.8.10",
+        "magetest/magento-phpspec-extension": "^4.0",
+        "my127/behat-chrome-extension": "^1.2",
+        "pdepend/pdepend": "2.5.2",
+        "phpmd/phpmd": "@stable",
+        "phpspec/phpspec": "4.0.0-alpha",
+        "phpunit/phpunit": "~6.2.0",
+        "sebastian/phpcpd": "2.0.4",
+        "sensiolabs/behat-page-object-extension": "^2.1",
+        "squizlabs/php_codesniffer": "3.2.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "MageTest\\PhpSpec\\MagentoExtension": "src",
+            "": [
+                "public/app/code/local",
+                "public/app/code/community",
+                "public/app/code/core",
+                "public/app",
+                "public/lib",
+                "src"
+            ],
+            "Mage" : "public/app/code/core"
+        }
+        "files": [
+            "app/etc/NonComposerComponentRegistration.php"
+        ],
+        "exclude-from-classmap": [
+            "**/dev/**",
+            "**/update/**",
+            "**/Test/**"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Acceptance\\": "features/bootstrap",
+            "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
+            "Magento\\Tools\\": "dev/tools/Magento/Tools/",
+            "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/",
+            "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
+            "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/"
+        }
+    },
+    "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/my127/behat-chrome-extension"
+        }
+    ],
+    "extra": {
+        "magento-root-dir": "public"
+    },
+    "scripts": {
+        "test": [
+            "@test-quality",
+            "@test-unit",
+            "@test-acceptance"
+        ],
+        "test-quality": [
+            "phpcs -v",
+            "phpmd ./src text ./phpmd.xml"
+        ],
+        "test-unit": [
+            "phpspec run"
+        ],
+        "test-acceptance": [
+            "behat"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
