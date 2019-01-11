@@ -3,6 +3,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
+        "aydin-hassan/magento-core-composer-installer": "^1.5",
         "inviqa/magento-symfony-container": "^1.1",
         "ocramius/proxy-manager": "^1.0",
         "symfony/proxy-manager-bridge": "^2.6.13"
@@ -41,9 +42,6 @@
             ],
             "Mage" : "public/app/code/core"
         }
-        "files": [
-            "app/etc/NonComposerComponentRegistration.php"
-        ],
         "exclude-from-classmap": [
             "**/dev/**",
             "**/update/**",
@@ -69,12 +67,25 @@
         {
             "type": "vcs",
             "url": "https://github.com/my127/behat-chrome-extension"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/inviqa/magento-{{ @('magento-edition') }}.git"
         }
     ],
     "extra": {
-        "magento-root-dir": "public"
+        "magento-root-dir": "public",
+        "auto-append-gitignore": true,
+        "magento-deploystrategy": "copy",
+        "magento-force": true
     },
     "scripts": {
+        "post-install-cmd": [
+            "tools/composer/link_local_files.sh"
+        ],
+        "post-update-cmd": [
+            "tools/composer/link_local_files.sh"
+        ],
         "test": [
             "@test-quality",
             "@test-unit",
