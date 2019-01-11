@@ -18,6 +18,7 @@ attributes.default:
   composer:
     auth:
       basic: ~
+      github: ~
 
   magento:
     edition: enterprise
