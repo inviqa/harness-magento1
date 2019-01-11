@@ -9,6 +9,9 @@ server {
   include snippets/certificate.conf;
   include snippets/ssl-params.conf;
 
+  root /app/public/;
+  index index.html;
+
   location ~ ^/errors/.*\.(xml|phtml)$ {
     deny all;
   }
@@ -85,6 +88,14 @@ server {
   }
 
   rewrite ^/api/rest /api.php?type=rest last;
+
+  location / {
+    try_files $uri @rewriteapp;
+  }
+
+  location @rewriteapp {
+    rewrite ^(.*)$ /index.php/$1 last;
+  }
 
   location ~ \.php(/|$) {
     fastcgi_pass php-fpm:9000;
