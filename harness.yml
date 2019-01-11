@@ -13,8 +13,6 @@ harness('magento1'):
       secret:
         - aws.id
         - aws.key
-        - magento.username
-        - magento.password
         - magento.crypt.key
 ---
 import:
