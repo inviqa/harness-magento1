@@ -99,7 +99,7 @@ server {
 
 {% if @('app.mode') == 'development' %}
     fastcgi_param MAGE_IS_DEVELOPER_MODE 1;
-{% end %}
+{% endif %}
   }
 
   gzip on;

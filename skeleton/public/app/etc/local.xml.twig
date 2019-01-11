@@ -36,7 +36,7 @@
                 </connection>
             </default_setup>
         </resources>
-        {% include 'skeleton/app/etc/_twig/local.xml/session/' ~ @('magento.config.session.save') ~ '.twig' %}
+        {% include 'skeleton/public/app/etc/_twig/local.xml/session/' ~ @('magento.config.session.save') ~ '.twig' %}
         <session_cache_limiter><![CDATA[nocache]]></session_cache_limiter><!-- see http://php.net/manual/en/function.session-cache-limiter.php#82174 for possible values -->
         <cache>
              <backend><![CDATA[Cm_Cache_Backend_Redis]]></backend><!-- apc / memcached / xcache / Cm_Cache_Backend_Redis empty=file -->
