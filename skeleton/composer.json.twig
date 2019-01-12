@@ -72,16 +72,10 @@
     "extra": {
         "magento-root-dir": "public",
         "auto-append-gitignore": true,
-        "magento-deploystrategy": "copy",
+        "magento-deploystrategy": "symlink",
         "magento-force": true
     },
     "scripts": {
-        "post-install-cmd": [
-            "tools/composer/link_local_files.sh"
-        ],
-        "post-update-cmd": [
-            "tools/composer/link_local_files.sh"
-        ],
         "test": [
             "@test-quality",
             "@test-unit",
