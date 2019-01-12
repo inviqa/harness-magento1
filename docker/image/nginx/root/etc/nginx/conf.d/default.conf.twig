@@ -9,6 +9,15 @@ server {
   include snippets/certificate.conf;
   include snippets/ssl-params.conf;
 
+  set $custom_https $https;
+  set $custom_scheme $scheme;
+  if ($http_x_forwarded_proto) {
+    set $custom_scheme $http_x_forwarded_proto;
+  }
+  if ($http_x_forwarded_proto = https) {
+    set $custom_https on;
+  }
+
   root /app/public/;
   index index.html;
 
@@ -101,7 +110,7 @@ server {
     fastcgi_pass php-fpm:9000;
     fastcgi_split_path_info ^(.+\.php)(/.*)$;
     include fastcgi_params;
-    fastcgi_param HTTPS $https;
+    fastcgi_param HTTPS $custom_https;
     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 
     fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
