@@ -25,7 +25,8 @@ services:
       - traefik.enable=false
     build:
       context: ../
-      dockerfile: .my127ws/docker/image/console/Dockerfile
+      dockerfile: .my127ws/docker/image/console/Dockerfile{% if @('php.version') == '5.6' %}-5.6{% endif %}
+
 {% if @('app.build') == 'static' %}
       args:
         APP_MODE: {{ @('app.mode') }}
@@ -66,7 +67,10 @@ services:
       - private
       - shared
   php-fpm:
-    build: docker/image/php-fpm
+    build:
+      context: docker/image/php-fpm
+      dockerfile: Dockerfile{% if @('php.version') == '5.6' %}-5.6{% endif %}
+
 {% if @('app.build') == 'dynamic' %}
     entrypoint: /entrypoint.dynamic.sh
     volumes:
