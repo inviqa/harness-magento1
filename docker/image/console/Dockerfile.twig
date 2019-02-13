@@ -1,4 +1,4 @@
-FROM my127/magento1-console:7.2-fpm-alpine
+FROM my127/magento1-console:{{ @('php.version') }}-fpm-alpine
 
 COPY .my127ws/docker/image/console/root /
 

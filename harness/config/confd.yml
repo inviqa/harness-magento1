@@ -15,6 +15,7 @@ confd('harness:/'):
   - { src: skeleton/auth.json }
   - { src: skeleton/behat.yml }
   - { src: skeleton/composer.json }
+  - { src: skeleton/composer-5.6.json }
   - { src: skeleton/Jenkinsfile }
   - { src: .env }
   - { src: docker-compose.yml }
