@@ -20,6 +20,7 @@ function task_magento_install()
         --db_user '${DB_USER}' \
         --db_pass '${DB_PASS}' \
         --url 'https://${APP_HOST}/' \
+        --skip_url_validation 'yes' \
         --use_rewrites 'yes' \
         --use_secure 'yes' \
         --secure_base_url 'https://${APP_HOST}/' \
