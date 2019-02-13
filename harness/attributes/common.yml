@@ -28,6 +28,7 @@ attributes.default:
         save: redis
 
   php:
+    version: 7.2
     ini:
       memory_limit: 1024M
     ext-xdebug:
@@ -37,7 +38,6 @@ attributes.default:
         remote_autostart: 1
         remote_port: 9000
         remote_host: host.docker.internal
-    version: 7.2
 
   assets:
     remote: ="s3://"~@("aws.bucket")~"/development"

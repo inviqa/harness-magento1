@@ -1,4 +1,4 @@
-FROM my127/magento1:7.2-fpm-alpine
+FROM my127/magento1:{{ @('php.version') }}-fpm-alpine
 
 WORKDIR /app
 
