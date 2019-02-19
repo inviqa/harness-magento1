@@ -1,10 +1,9 @@
+{% if @('app.build') == 'static' %}
+FROM {{ @('app.docker.repository') ~ ':' ~ @('app.version') }}-console as console
+{% endif %}
 FROM my127/magento1:{{ @('php.version') }}-fpm-alpine
 
 WORKDIR /app
-
-{% if @('app.build') == 'static' %}
-FROM {{ @('namespace') }}_console:latest as console
-{% endif %}
 
 COPY root  /
 

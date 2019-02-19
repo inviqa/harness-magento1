@@ -13,6 +13,13 @@ attributes.default:
     #   production  - leaner images with less tooling and magento is run in production mode
     mode: development
 
+    version: latest
+
+    name: =@("workspace.name")
+
+    docker:
+      repository: =@("workspace.name")
+
   docker-sync: yes
 
   composer:
