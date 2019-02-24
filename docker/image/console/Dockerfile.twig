@@ -8,7 +8,7 @@ ENV APP_MODE {{ @('app.mode') }}
 
 # build - composer
 RUN chown build:build /app
-COPY --chown=build:build .my127ws/skeleton/auth.json composer.json composer.lock /app
+COPY --chown=build:build .my127ws/skeleton/auth.json composer.json composer.lock /app/
 USER build
 RUN composer install --no-scripts --no-autoloader && rm -rf /home/build/.composer/cache
 USER root
