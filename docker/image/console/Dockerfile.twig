@@ -7,13 +7,13 @@ ENV APP_MODE {{ @('app.mode') }}
 {% if @('app.build') == 'static' %}
 
 # build - composer
-COPY --chown=build:build .my127ws/skeleton/auth.json composer.json composer.lock ./
+RUN chown build:build /app
+COPY --chown=build:build .my127ws/skeleton/auth.json composer.json composer.lock /app
 USER build
 RUN composer install --no-scripts --no-autoloader && rm -rf /home/build/.composer/cache
 USER root
 
 # build - application
-RUN chown build:build /app
 COPY --chown=build:build .my127ws/skeleton       /home/build/skeleton
 COPY --chown=build:build ./                      /app
 USER build
