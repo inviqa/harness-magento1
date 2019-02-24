@@ -7,4 +7,6 @@ function task_composer_install()
     else
         passthru "composer install --no-interaction"
     fi
+
+    rm -rf /home/build/.composer/cache
 }
