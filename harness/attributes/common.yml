@@ -52,6 +52,8 @@ attributes.default:
 
   php:
     version: 7.2
+    fpm:
+      hostname: php-fpm
     ini:
       memory_limit: 1024M
     ext-xdebug:

@@ -22,3 +22,6 @@ attributes:
         redis:
           hostname: localhost
           database: 2
+  php:
+    fpm:
+      hostname: localhost
