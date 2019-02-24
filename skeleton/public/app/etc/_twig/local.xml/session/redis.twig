@@ -1,11 +1,11 @@
 <session_save><![CDATA[db]]></session_save>
 <redis_session>
-    <host><![CDATA[redis-session]]></host>
-    <port><![CDATA[6379]]></port>
+    <host><![CDATA[{{ @('magento.config.session.redis.hostname') ?: 'redis' }}]]></host>
+    <port><![CDATA[{{ @('magento.config.session.redis.port') ?: '6379' }}]]></port>
     <password><![CDATA[]]></password><!-- Specify if your Redis server requires authentication -->
     <timeout><![CDATA[2.5]]></timeout>
     <persistent><![CDATA[c]]></persistent> <!-- Specify unique string to enable persistent connections. E.g.: sess-db0; bugs with phpredis and php-fpm are known: https://github.com/nicolasff/phpredis/issues/70 -->
-    <db><![CDATA[0]]></db>
+    <db><![CDATA[{{ @('magento.config.session.redis.database') ?: '0' }}]]></db>
     <compression_threshold><![CDATA[2048]]></compression_threshold><!-- Set to 0 to disable compression -->
     <compression_lib><![CDATA[gzip]]></compression_lib><!-- gzip, lzf or snappy -->
     <log_level><![CDATA[4]]></log_level><!-- 0 (emergency: system is unusable), 4 (warning; additional information, recommended), 5 (notice: normal but significant condition), 6 (info: informational messages), 7 (debug: the most information for development/testing) -->

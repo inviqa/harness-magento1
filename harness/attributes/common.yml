@@ -33,6 +33,22 @@ attributes.default:
     config:
       session:
         save: redis
+        redis:
+          hostname: redis-session
+          port: 6379
+          database: 0
+      cache:
+        save: redis
+        redis:
+          hostname: redis
+          port: 6379
+          database: 1
+      fpc:
+        save: redis
+        redis:
+          hostname: redis
+          port: 6379
+          database: 2
 
   php:
     version: 7.2

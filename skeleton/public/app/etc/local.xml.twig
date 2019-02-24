@@ -41,9 +41,9 @@
         <cache>
              <backend><![CDATA[Cm_Cache_Backend_Redis]]></backend><!-- apc / memcached / xcache / Cm_Cache_Backend_Redis empty=file -->
                 <backend_options>
-                    <server><![CDATA[redis]]></server> <!-- or absolute path to unix socket for better performance -->
-                     <port><![CDATA[6379]]></port>
-                     <database><![CDATA[0]]></database>
+                     <server><![CDATA[{{ @('magento.config.cache.redis.hostname') ?: 'redis' }}]]></server> <!-- or absolute path to unix socket for better performance -->
+                     <port><![CDATA[{{ @('magento.config.cache.redis.port') ?: '6379' }}]]></port>
+                     <database><![CDATA[{{ @('magento.config.cache.redis.database') ?: '1' }}]]></database>
                      <force_standalone><![CDATA[1]]></force_standalone><!-- 0 for phpredis, 1 for standalone PHP -->
                      <automatic_cleaning_factor><![CDATA[0]]></automatic_cleaning_factor> <!-- Disabled by default -->
                      <compress_data><![CDATA[1]]></compress_data><!-- 0-9 for compression level, recommended: 0 or 1 -->
@@ -57,9 +57,9 @@
         <full_page_cache>
              <backend><![CDATA[Cm_Cache_Backend_Redis]]></backend><!-- apc / memcached / xcache / Cm_Cache_Backend_Redis empty=file -->
                  <backend_options>
-                    <server><![CDATA[redis]]></server> <!-- or absolute path to unix socket for better performance -->
-                     <port><![CDATA[6379]]></port>
-                     <database><![CDATA[1]]></database>
+                     <server><![CDATA[{{ @('magento.config.fpc.redis.hostname') ?: 'redis' }}]]></server> <!-- or absolute path to unix socket for better performance -->
+                     <port><![CDATA[{{ @('magento.config.fpc.redis.port') ?: '6379' }}]]></port>
+                     <database><![CDATA[{{ @('magento.config.fpc.redis.database') ?: '2' }}]]></database>
                      <force_standalone><![CDATA[1]]></force_standalone><!-- 0 for phpredis, 1 for standalone PHP -->
                      <automatic_cleaning_factor><![CDATA[0]]></automatic_cleaning_factor> <!-- Disabled by default -->
                      <compress_data><![CDATA[1]]></compress_data><!-- 0-9 for compression level, recommended: 0 or 1 -->

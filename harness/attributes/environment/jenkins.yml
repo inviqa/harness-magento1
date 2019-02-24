@@ -1,7 +1,24 @@
 
 attributes:
-  namespace: =exec("git log -n 1 --pretty=format:'%H'")
+  hostname: localhost
   app:
     build: static
     mode: production
     version: =exec("git log -n 1 --pretty=format:'%H'")
+  magento:
+    config:
+      session:
+        save: redis
+        redis:
+          hostname: localhost
+          database: 0
+      cache:
+        save: redis
+        redis:
+          hostname: localhost
+          database: 1
+      fpc:
+        save: redis
+        redis:
+          hostname: localhost
+          database: 2
