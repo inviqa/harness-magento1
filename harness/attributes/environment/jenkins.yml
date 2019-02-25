@@ -25,3 +25,5 @@ attributes:
   php:
     fpm:
       hostname: localhost
+  database:
+    host: 127.0.0.1
