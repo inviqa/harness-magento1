@@ -8,9 +8,13 @@ function task_assets_apply()
     IS_DATABASE_APPLIED="$(mysql -ss -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" -e "$SQL")"
 
     if [ "$IS_DATABASE_APPLIED" = "no" ]; then
+        local DATABASE_FILE="/app/${ASSETS_DIR}/${DB_NAME}.sql.gz"
+        if [ ! -f "$DATABASE_FILE" ]; then
+            DATABASE_FILE="$(find "/app/${ASSETS_DIR}/" -maxdepth 1 -name "${DB_NAME}*.sql.gz" -print | head -n1)"
+        fi
 
-        if [ -f "/app/${ASSETS_DIR}/${DB_NAME}.sql.gz" ]; then
-            run "zcat /app/${ASSETS_DIR}/${DB_NAME}.sql.gz | mysql -h $DB_HOST -u root -p$DB_ROOT_PASS $DB_NAME"
+        if [ -f "$DATABASE_FILE" ]; then
+            run "zcat $DATABASE_FILE | mysql -h $DB_HOST -u root -p$DB_ROOT_PASS $DB_NAME"
         else
             task "magento:install"
         fi
