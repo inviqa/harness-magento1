@@ -25,7 +25,7 @@ function task_assets_apply()
         task "magento:configure"
     fi
 
-    for file in /app/tools/assets/development/*.files.{tgz,tar.gz}; do
+    for file in "/app/${ASSETS_DIR}/"*.files.{tgz,tar.gz}; do
         [ -f "$file" ] || continue
         run "tar -zxvf ${file} -C /app"
     done
