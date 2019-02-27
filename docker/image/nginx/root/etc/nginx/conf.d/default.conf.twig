@@ -8,6 +8,7 @@ server {
 
   include snippets/certificate.conf;
   include snippets/ssl-params.conf;
+  include snippets/top-*.conf;
 
   set $custom_https $https;
   set $custom_scheme $scheme;
@@ -142,6 +143,8 @@ server {
     application/xml+rss
     image/svg+xml;
   gzip_vary on;
+
+  include snippets/bottom-*.conf;
 
   # Banned locations (only reached if the earlier PHP entry point regexes don't match)
   location ~* (\.php$|\.htaccess$|\.git) {
