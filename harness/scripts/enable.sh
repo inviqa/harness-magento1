@@ -15,6 +15,7 @@ if [ ! -f .flag-built ]; then
         passthru docker-compose -p "$NAMESPACE" build --no-cache console
         passthru docker-compose -p "$NAMESPACE" up -d console
         passthru docker-compose -p "$NAMESPACE" exec -T -u build console app init
+        passthru ws frontend build
         [[ "${APP_MODE}" = "production" ]] && passthru docker-compose -p "$NAMESPACE" exec -T -u build console app build pass-2
         passthru docker commit "${NAMESPACE}_console_1" "${NAMESPACE}_console:latest"
         passthru docker-compose -p "$NAMESPACE" build --no-cache nginx php-fpm
@@ -24,6 +25,7 @@ if [ ! -f .flag-built ]; then
         passthru docker-compose -p "$NAMESPACE" exec -T -u build console app build pass-1
         passthru docker-compose -p "$NAMESPACE" exec -T -u build console app build pass-2
         passthru docker-compose -p "$NAMESPACE" exec -T -u build console app init
+        passthru ws frontend build
     fi
 
     touch .flag-built

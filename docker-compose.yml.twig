@@ -68,6 +68,14 @@ services:
     networks:
       - private
       - shared
+  node:
+    build: docker/image/node
+{% if @('app.build') == 'dynamic' %}
+    volumes:
+      - {{ (dockersync) ? @('workspace.name') ~ '-sync:/app:nocopy' : '../:/app:delegated' }}
+{% endif %}
+    networks:
+      - private
   php-fpm:
     build: docker/image/php-fpm
 {% if @('app.build') == 'dynamic' %}

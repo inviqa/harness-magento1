@@ -20,6 +20,9 @@ attributes.default:
       basic: ~
       github: ~
 
+  frontend:
+    path: /app
+
   magento:
     edition: enterprise
     version: 1.14.4.0
