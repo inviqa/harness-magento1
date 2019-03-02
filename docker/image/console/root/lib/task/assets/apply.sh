@@ -19,8 +19,8 @@ function task_assets_apply()
             task "magento:install"
         fi
 
-        run "bin/n98-magerun.phar index:reindex:all"
         run "bin/n98-magerun.phar sys:setup:incremental -n"
+        run "bin/n98-magerun.phar index:reindex:all"
 
         task "magento:configure"
     fi
