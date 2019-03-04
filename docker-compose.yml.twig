@@ -15,12 +15,8 @@ services:
     labels:
       - traefik.enable=false
     networks:
-      private:
-        aliases:
-          - chrome
-      shared:
-        aliases:
-          - {{ @('namespace') }}_chrome
+      - private
+      - shared
   console:
 {% if @('app.build') == 'dynamic' %}
     entrypoint: /entrypoint.dynamic.sh
@@ -47,13 +43,13 @@ services:
       DB_PASS: ${DB_PASS}
       DB_NAME: ${DB_NAME}
       DB_ROOT_PASS: ${DB_ROOT_PASS}
+    links:
+      - memcached:memcached
+      - mysql:mysql
+      - redis:redis
+      - redis-session:redis-session
     networks:
       - private
-    depends_on:
-      - memcached
-      - mysql
-      - redis
-      - redis-session
   nginx:
     build: docker/image/nginx
 {% if @('app.build') == 'dynamic' %}
@@ -67,18 +63,12 @@ services:
       - traefik.port=80
       - co.elastic.logs/module=nginx
       - co.elastic.metrics/module=nginx
-    depends_on:
-      - php-fpm
+    links:
+      - php-fpm:php-fpm
     networks:
-      private:
-        aliases:
-          - nginx
-      monitoring:
-        aliases:
-          - {{ @('namespace') }}_nginx
-      shared:
-        aliases:
-          - {{ @('namespace') }}_nginx
+      - private
+      - monitoring
+      - shared
   node:
     build: docker/image/node
 {% if @('app.build') == 'dynamic' %}
@@ -96,15 +86,17 @@ services:
 {% endif %}
     labels:
       - traefik.enable=false
-    networks:
-      private:
-        aliases:
-          - php-fpm
-      monitoring:
-        aliases:
-          - {{ @('namespace') }}_php-fpm
     depends_on:
       - console
+    links:
+      - memcached:memcached
+      - mysql:mysql
+      - redis:redis
+      - redis-session:redis-session
+    networks:
+      - private
+      - monitoring
+      - shared
     environment:
       <<: *APP_ENV_VARS
   memcached:
@@ -128,36 +120,24 @@ services:
       - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${DB_PASS}
     networks:
-      private:
-        aliases:
-          - mysql
-      monitoring:
-        aliases:
-          - {{ @('namespace') }}_mysql
+      - private
+      - monitoring
   redis:
     image: redis:4-alpine
     labels:
       - traefik.enable=false
       - co.elastic.logs/module=redis
     networks:
-      private:
-        aliases:
-          - redis
-      monitoring:
-        aliases:
-          - {{ @('namespace') }}_redis
+      - private
+      - monitoring
   redis-session:
     image: redis:4-alpine
     labels:
       - traefik.enable=false
       - co.elastic.logs/module=redis
     networks:
-      private:
-        aliases:
-          - redis-session
-      monitoring:
-        aliases:
-          - {{ @('namespace') }}_redis-session
+      - private
+      - monitoring
 networks:
   private:
     external: false
