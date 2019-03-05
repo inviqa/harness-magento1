@@ -79,14 +79,14 @@ command('assets upload'):
 command('frontend build'):
   exec: |
     #!bash(harness:/)|@
-    docker-compose -p @('namespace') run --rm -u node node sh -c 'cd @('frontend.path') && if [ ! -f "package.json" ]; then exit 0; fi && npm install && node_modules/.bin/gulp build'
+    docker-compose -p @('namespace') exec console bash -c 'cd @('frontend.path') && if [ ! -f "package.json" ]; then exit 0; fi && npm install && node_modules/.bin/gulp build'
 
 command('frontend watch'):
   exec: |
     #!bash(harness:/)|@
-    docker-compose -p @('namespace') run --rm -u node node sh -c 'cd @('frontend.path') && if [ ! -f "package.json" ]; then exit 0; fi && node_modules/.bin/gulp serve'
+    docker-compose -p @('namespace') exec console bash -c 'cd @('frontend.path') && if [ ! -f "package.json" ]; then exit 0; fi && node_modules/.bin/gulp serve'
 
 command('frontend console'):
   exec: |
     #!bash(harness:/)|@
-    docker-compose -p @('namespace') run --rm -u node node sh -c 'cd @('frontend.path'); sh'
+    docker-compose -p @('namespace') exec console bash -c 'cd @('frontend.path'); bash'
