@@ -24,8 +24,8 @@ if [ ! -f .flag-built ]; then
         passthru docker-compose -p "$NAMESPACE" up -d --build
         passthru docker-compose -p "$NAMESPACE" exec -T -u build console app build pass-1
         passthru docker-compose -p "$NAMESPACE" exec -T -u build console app build pass-2
-        passthru docker-compose -p "$NAMESPACE" exec -T -u build console app init
         passthru ws frontend build
+        passthru docker-compose -p "$NAMESPACE" exec -T -u build console app init
     fi
 
     touch .flag-built
