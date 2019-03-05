@@ -12,8 +12,6 @@ RUN . /home/build/.nvm/nvm.sh \
  && nvm use {{ @('node.version') }} \
  && nvm alias default {{ @('node.version') }} \
  && npm install -g yarn
-ENV NODE_PATH $NVM_DIR/versions/node/{{ @('node.version') }}/lib/node_modules
-ENV PATH      $NVM_DIR/versions/node/{{ @('node.version') }}/bin:$PATH
 USER root
 {% endif %}
 
