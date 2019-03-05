@@ -30,6 +30,11 @@ attributes.default:
       session:
         save: redis
 
+  node:
+    # only set this attribute if you wish to override the supplied node version, by default
+    # the supplied version will be the current LTS.
+    version: null
+
   php:
     version: 7.2
     ini:
