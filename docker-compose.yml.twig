@@ -67,7 +67,6 @@ services:
       - php-fpm:php-fpm
     networks:
       - private
-      - monitoring
       - shared
   node:
     build: docker/image/node
@@ -95,7 +94,6 @@ services:
       - redis-session:redis-session
     networks:
       - private
-      - monitoring
       - shared
     environment:
       <<: *APP_ENV_VARS
@@ -121,7 +119,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASS}
     networks:
       - private
-      - monitoring
+      - shared
   redis:
     image: redis:4-alpine
     labels:
@@ -129,7 +127,7 @@ services:
       - co.elastic.logs/module=redis
     networks:
       - private
-      - monitoring
+      - shared
   redis-session:
     image: redis:4-alpine
     labels:
@@ -137,13 +135,10 @@ services:
       - co.elastic.logs/module=redis
     networks:
       - private
-      - monitoring
+      - shared
 networks:
   private:
     external: false
-  monitoring:
-    external:
-      name: my127ws_monitoring
   shared:
     external:
       name: my127ws
