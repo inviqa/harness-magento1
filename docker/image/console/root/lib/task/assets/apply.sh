@@ -18,11 +18,6 @@ function task_assets_apply()
         else
             task "magento:install"
         fi
-
-        run "bin/n98-magerun.phar sys:setup:incremental -n"
-        run "bin/n98-magerun.phar index:reindex:all"
-
-        task "magento:configure"
     fi
 
     for file in "/app/${ASSETS_DIR}/"*.files.{tgz,tar.gz}; do

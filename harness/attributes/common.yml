@@ -20,8 +20,29 @@ attributes.default:
       basic: ~
       github: ~
 
+  backend:
+    path: /app
+    build:
+      when: -f "composer.json"
+      steps:
+        - task "composer:install"
+        - task "n98:install"
+    init:
+      steps:
+        - run "n98-magerun.phar config:set 'web/unsecure/base_url' \"https://${APP_HOST}/\""
+        - run "n98-magerun.phar config:set 'web/secure/base_url'   \"https://${APP_HOST}/\""
+        - run "n98-magerun.phar sys:setup:incremental -n"
+        - run "n98-magerun.phar index:reindex:all"
+        - run "n98-magerun.phar cache:clean"
+
   frontend:
     path: /app
+    watch: node_modules/.bin/gulp serve
+    build:
+      when: -f "package.json"
+      steps:
+        - run "npm install"
+        - run "node_modules/.bin/gulp build"
 
   magento:
     edition: enterprise
