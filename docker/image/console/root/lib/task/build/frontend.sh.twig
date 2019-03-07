@@ -2,7 +2,6 @@
 
 function task_build_frontend()
 {(
-    set -e
     cd {{ @('frontend.path') }}
     
     if [ ! {{ @('frontend.build.when')|raw }} ]; then
@@ -13,5 +12,4 @@ function task_build_frontend()
     {{ step|raw }}
     {% endfor %}
 
-    set +e
 )}

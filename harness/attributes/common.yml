@@ -26,7 +26,7 @@ attributes.default:
       when: -f "composer.json"
       steps:
         - task "composer:install"
-        - task "magento:n98:install"
+        - task "n98:install"
     init:
       steps:
         - run "n98-magerun.phar config:set 'web/unsecure/base_url' \"https://${APP_HOST}/\""
