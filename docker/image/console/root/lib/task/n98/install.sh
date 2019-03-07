@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function task_magento_n98()
+function task_n98_install()
 {
   if [ ! -f bin/n98-magerun.phar ]; then
     mkdir -p bin
