@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+function task_gulp_serve()
+{
+    (
+        cd {{ @('frontend.path') }}
+        
+        if [ ! -f "package.json" ]; then
+            return 0;
+        fi
+
+        node_modules/.bin/gulp serve $@
+    )
+}
