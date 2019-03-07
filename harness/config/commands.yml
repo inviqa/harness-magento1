@@ -84,7 +84,7 @@ command('frontend build'):
 command('frontend watch'):
   exec: |
     #!bash(harness:/)|@
-    docker-compose -p @('namespace') exec -u build console bash -i -c 'app gulp:serve'
+    docker-compose -p @('namespace') exec -u build console bash -i -c 'cd @('frontend.path'); @('frontend.watch')'
 
 command('frontend console'):
   exec: |

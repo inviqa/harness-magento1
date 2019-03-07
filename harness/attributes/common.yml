@@ -22,6 +22,12 @@ attributes.default:
 
   frontend:
     path: /app
+    watch: node_modules/.bin/gulp serve
+    build:
+      when: -f "package.json"
+      steps:
+        - npm install
+        - node_modules/.bin/gulp build
 
   magento:
     edition: enterprise

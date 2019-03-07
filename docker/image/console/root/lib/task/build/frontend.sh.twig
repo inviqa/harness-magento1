@@ -1,0 +1,16 @@
+#!/bin/bash
+
+function task_build_frontend()
+{
+    (
+        cd {{ @('frontend.path') }}
+        
+        if [ ! {{ @('frontend.build.when') }} ]; then
+            return 0;
+        fi
+
+        {% for step in @('frontend.build.steps') %}
+            {{ step }}
+        {% endfor %}
+    )
+}
