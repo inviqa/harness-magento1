@@ -27,7 +27,7 @@ function task_magento_install()
         --use_secure_admin 'yes' \
         --admin_firstname 'First' \
         --admin_lastname 'Last' \
-        --admin_email 'admin@localhost.local' \
+        --admin_email 'admin@example.com' \
         --admin_username 'admin' \
         --admin_password 'admin123' \
         --encryption_key '${MAGENTO_CRYPT_KEY}' \
