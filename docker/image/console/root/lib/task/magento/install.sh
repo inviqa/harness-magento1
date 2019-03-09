@@ -37,6 +37,6 @@ function task_magento_install()
 
     rm -f /app/public/app/etc/local.xml
 
-    task "skeleton:apply"
+    task "overlay:apply"
     task "assets:dump"
 }
