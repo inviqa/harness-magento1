@@ -1,5 +1,5 @@
 {
-    "name": "{{ @('workspace.name') }}",
+    "name": "{{ @('workspace.name')|lower }}/magento",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -82,7 +82,7 @@
             "@test-acceptance"
         ],
         "test-quality": [
-            "phpcs -v",
+            "phpcs -v ./src",
             "phpmd ./src text ./phpmd.xml"
         ],
         "test-unit": [
