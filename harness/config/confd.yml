@@ -16,7 +16,7 @@ confd('harness:/'):
   - { src: docker/stack/preview/docker-compose.yml }
   - { src: application/overlay/public/app/etc/local.xml }
   - { src: application/overlay/auth.json }
-  - { src: application/overlay/.dockerignore }
+  - { src: application/overlay/.dockerignore, dst: workspace:/.dockerignore }
   - { src: application/skeleton/behat.yml }
   - { src: application/skeleton/composer.json }
   - { src: application/skeleton/Jenkinsfile }
