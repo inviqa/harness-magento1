@@ -1,5 +1,5 @@
 {
-    "name": "{{ @('workspace.name') }}",
+    "name": "{{ @('workspace.name')|lower }}/magento",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -15,10 +15,12 @@
         "behat/mink-goutte-driver": "^1.2",
         "ciaranmcnulty/behat-stepthroughextension": "^1.0",
         "dmore/chrome-mink-driver": "^2.6",
-        "friends-of-behat/context-service-extension": "^0.3",
+        "friends-of-behat/context-service-extension": "dev-feature/0.3.0-with-initialised-contexts",
         "friends-of-behat/cross-container-extension": "^0.3",
         "friendsofphp/php-cs-fixer": "~2.2.1",
+        "inviqa/magento1-coding-standard": "dev-master",
         "lusitanian/oauth": "~0.8.10",
+        "magento/marketplace-eqp": "dev-master#3303dfc as 2.0.1",
         "magetest/magento-phpspec-extension": "^4.0",
         "my127/behat-chrome-extension": "^1.2",
         "pdepend/pdepend": "2.5.2",
@@ -67,6 +69,14 @@
         {
             "type": "vcs",
             "url": "https://github.com/inviqa/magento-{{ @('magento.edition') }}.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/kierenevans/ContextServiceExtension.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/magento/marketplace-eqp.git"
         }
     ],
     "extra": {
@@ -82,7 +92,7 @@
             "@test-acceptance"
         ],
         "test-quality": [
-            "phpcs -v",
+            "phpcs -v ./src",
             "phpmd ./src text ./phpmd.xml"
         ],
         "test-unit": [

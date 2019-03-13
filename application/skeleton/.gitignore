@@ -16,7 +16,6 @@
 /docker-sync.yml
 /phpcs.xml
 /phpmd.xml
-/behat.yml
 /public/app/etc/local.xml
 /public/errors/local.xml
 /auth.json
