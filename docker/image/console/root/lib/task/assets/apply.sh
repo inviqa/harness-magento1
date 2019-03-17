@@ -16,7 +16,7 @@ function task_assets_apply()
         if [ -f "$DATABASE_FILE" ]; then
             run "zcat $DATABASE_FILE | mysql -h $DB_HOST -u root -p$DB_ROOT_PASS $DB_NAME"
         else
-            task "magento:install"
+            task "install"
         fi
     fi
 

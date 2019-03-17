@@ -1,9 +1,11 @@
 
 confd('harness:/'):
+  # base templates
   - { src: docker/image/console/Dockerfile }
   - { src: docker/image/console/root/lib/task/build/frontend.sh }
   - { src: docker/image/console/root/lib/task/build/backend.sh }
   - { src: docker/image/console/root/lib/task/init.sh }
+  - { src: docker/image/console/root/lib/task/install.sh }
   - { src: docker/image/console/root/usr/local/etc/php/php.ini }
   - { src: docker/image/console/root/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini }
   - { src: docker/image/nginx/Dockerfile }
@@ -13,13 +15,12 @@ confd('harness:/'):
   - { src: docker/image/php-fpm/Dockerfile }
   - { src: docker/image/php-fpm/root/usr/local/etc/php/php.ini }
   - { src: docker/image/php-fpm/root/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini }
-  - { src: docker/stack/preview/docker-compose.yml }
-  - { src: application/overlay/public/app/etc/local.xml }
   - { src: application/overlay/auth.json }
   - { src: application/overlay/.dockerignore, dst: workspace:/.dockerignore }
-  - { src: application/skeleton/behat.yml }
-  - { src: application/skeleton/composer.json }
-  - { src: application/skeleton/Jenkinsfile }
   - { src: .env }
   - { src: docker-compose.yml }
   - { src: docker-sync.yml }
+  # harness-magento1 templates
+  - { src: application/overlay/public/app/etc/local.xml }
+  - { src: application/skeleton/behat.yml }
+  - { src: application/skeleton/composer.json }

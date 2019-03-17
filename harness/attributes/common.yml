@@ -15,6 +15,11 @@ attributes.default:
 
   docker-sync: yes
 
+  docker:
+    image:
+      console: = 'my127/php:' ~ @('php.version') ~ '-fpm-stretch-console'
+      php-fpm: = 'my127/php:' ~ @('php.version') ~ '-fpm-stretch'
+
   composer:
     auth:
       basic: ~
@@ -26,30 +31,18 @@ attributes.default:
       when: -f "composer.json"
       steps:
         - task "composer:install"
-        - task "n98:install"
+    install:
+      steps: []
     init:
-      steps:
-        - run "n98-magerun.phar config:set 'web/unsecure/base_url' \"https://${APP_HOST}/\""
-        - run "n98-magerun.phar config:set 'web/secure/base_url'   \"https://${APP_HOST}/\""
-        - run "n98-magerun.phar sys:setup:incremental -n"
-        - run "n98-magerun.phar index:reindex:all"
-        - run "n98-magerun.phar cache:clean"
+      steps: []
 
   frontend:
     path: /app
-    watch: node_modules/.bin/gulp serve
+    watch: npm watch
     build:
       when: -f "package.json"
       steps:
         - run "npm install"
-        - run "node_modules/.bin/gulp build"
-
-  magento:
-    edition: enterprise
-    version: 1.14.4.0
-    config:
-      session:
-        save: redis
 
   node:
     # only set this attribute if you wish to override the supplied node version, by default
@@ -57,7 +50,7 @@ attributes.default:
     version: null
 
   php:
-    version: 7.2
+    version: 7.3
     ini:
       memory_limit: 1024M
     ext-xdebug:
@@ -74,9 +67,9 @@ attributes.default:
 
   database:
     host: mysql
-    user: magento
-    pass: magento
-    name: magento
+    user: app
+    pass: app
+    name: app
     root_pass: DV6RdNY3QcFsBk7V
 
   domain: my127.site
