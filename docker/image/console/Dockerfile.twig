@@ -1,4 +1,4 @@
-FROM my127/magento1:{{ @('php.version') }}-fpm-stretch-console
+FROM {{ @('docker.image.console') }}
 
 COPY .my127ws/docker/image/console/root /
 RUN chown -R build:build /home/build
